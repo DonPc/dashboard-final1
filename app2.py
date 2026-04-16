@@ -10,21 +10,21 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-# Configuración general
+
 sns.set(style="whitegrid")
 st.set_page_config(page_title="Dashboard Logístico", layout="wide")
 
-# Cargar datos
+
 df = pd.read_csv('data/tiempos logisticos 1.csv')
 
-# Preprocesamiento
+
 df = df.dropna(subset=["PRODUCTO", "HORAS_VIAJE"])
 df["HORAS_VIAJE"] = pd.to_numeric(df["HORAS_VIAJE"], errors="coerce")
 
-# Título
-st.title("📦 Dashboard de Tiempos Logísticos en Colombia")
 
-# Sidebar de selección
+st.title("Dashboard de Tiempos Logísticos en Colombia")
+
+
 grafico = st.sidebar.selectbox("Selecciona un gráfico", [
     "Histograma de Horas de Viaje por Producto",
     "Boxplot de Horas de Espera Descargue",
@@ -40,7 +40,7 @@ grafico = st.sidebar.selectbox("Selecciona un gráfico", [
     "Dispersión: Horas de Viaje vs Valor Pagado"
 ])
 
-# Mostrar gráficos según selección
+
 if grafico == "Histograma de Horas de Viaje por Producto":
     top_productos = df['PRODUCTO'].value_counts().nlargest(4).index
     df_filtrado = df[df['PRODUCTO'].isin(top_productos)]
